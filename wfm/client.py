@@ -16,7 +16,13 @@ class Client:
 
         orders = OrdersEndpoint(self)
         stats = StatisticsEndpoint(self)
-        self.item = ItemEndpoint(self, children={'orders': orders, 'stats': stats})
+        self.item = ItemEndpoint(
+            self,
+            children={
+                'orders': orders,
+                'stats': stats
+            }
+        )
 
         profile_orders = ProfileOrdersEndpoint(self)
         profile_stats = ProfileStatisticsEndpoint(self)
@@ -24,7 +30,7 @@ class Client:
 
         self.profile = ProfileEndpoint(
             self,
-            {
+            children={
                 'orders':  profile_orders,
                 'stats':   profile_stats,
                 'reviews': profile_reviews
