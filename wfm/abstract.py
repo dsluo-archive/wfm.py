@@ -1,3 +1,4 @@
+import abc
 import dataclasses
 from typing import Type, Dict, TYPE_CHECKING
 
@@ -5,7 +6,7 @@ if TYPE_CHECKING:
     from .client import Client
 
 
-class Endpoint:
+class Endpoint(abc.ABC):
     path: str = NotImplemented
     resource: Type['Resource'] = NotImplemented
 
@@ -17,6 +18,7 @@ class Endpoint:
         response = self.client._get(self.path.format(*args), **kwargs)
         return self._build_resource(response)
 
+    @abc.abstractmethod
     def _build_resource(self, response) -> resource:
         raise NotImplementedError
 
