@@ -7,7 +7,7 @@ from .endpoints import OrdersEndpoint, StatisticsEndpoint, ItemEndpoint, ItemsEn
 class Client:
     BASE_ENDPOINT = 'https://api.warframe.market/v1'
 
-    def __init__(self, session=None, language=None, platform=None):
+    def __init__(self, session=None, language='en', platform='pc'):
         self.session = session or requests.Session()
         self.language = language
         self.platform = platform
@@ -41,15 +41,10 @@ class Client:
         # self.ducats = DucatsEndpoint(self)
 
     def _request(self, method, endpoint, **kwargs):
-        language = kwargs.pop('language', self.language)
-        platform = kwargs.pop('platform', self.platform)
-
-        if language or platform:
-            kwargs['headers'] = {}
-            if language:
-                kwargs['headers']['language'] = language
-            if platform:
-                kwargs['headers']['platform'] = platform
+        kwargs['headers'] = {
+            'language': self.language,
+            'platform': self.platform
+        }
 
         response = self.session.request(method, self.BASE_ENDPOINT + endpoint, **kwargs)
         json = response.json()
