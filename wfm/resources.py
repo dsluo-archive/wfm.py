@@ -4,29 +4,30 @@ from typing import List
 from .abstract import Resource
 
 
-@dataclass()
+@dataclass(frozen=True)
 class Item(Resource):
-    id: str
     url_name: str
+    id: str
     item_name: str
-    tags: List[str]
+    tags: List[str] = None
+    thumb: str = None
 
-@dataclass()
+@dataclass(frozen=True)
 class Order(Resource):
     pass
 
-@dataclass()
+@dataclass(frozen=True)
 class Statistics(Resource):
     pass
 
-@dataclass()
+@dataclass(frozen=True)
 class Profile(Resource):
     pass
 
-@dataclass()
+@dataclass(frozen=True)
 class Review(Resource):
     pass
 
-@dataclass()
+@dataclass(frozen=True)
 class Ducat(Resource):
     pass
