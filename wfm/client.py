@@ -1,7 +1,7 @@
 import requests
 
 from .endpoints import OrdersEndpoint, StatisticsEndpoint, ItemEndpoint, ItemsEndpoint, ProfileOrdersEndpoint, \
-    ProfileStatisticsEndpoint, ProfileReviewsEndpoint, ProfileEndpoint, DucatsEndpoint
+    ProfileStatisticsEndpoint, ProfileReviewsEndpoint, ProfileEndpoint
 
 
 class Client:
@@ -12,17 +12,14 @@ class Client:
         self.language = language
         self.platform = platform
 
-        self.items = ItemsEndpoint(self)
-
         orders = OrdersEndpoint(self)
         stats = StatisticsEndpoint(self)
-        self.item = ItemEndpoint(
-            self,
-            children={
-                'orders': orders,
-                'stats': stats
-            }
-        )
+        item_children = {
+            'orders': orders,
+            'stats':  stats
+        }
+        self.item = ItemEndpoint(self, item_children)
+        self.items = ItemsEndpoint(self, item_children)
 
         profile_orders = ProfileOrdersEndpoint(self)
         profile_stats = ProfileStatisticsEndpoint(self)
