@@ -6,6 +6,11 @@ with open('README.md', 'r') as f:
 with open('requirements.txt', 'r') as f:
     requirements = f.read().splitlines()
 
+# todo
+# extra_require = {
+#     'test': ['pytest==4.4.0']
+# }
+
 setuptools.setup(
     name='wfm.py',
     version='0.0.1',
@@ -16,8 +21,9 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/dsluo/wfm.py',
-    packages=setuptools.find_packages(),
+    packages=['wfm'],
     install_requires=requirements,
+    # extra_require=extra_require,
     python_requires='>=3.7',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
