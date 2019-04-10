@@ -23,6 +23,9 @@ class Item(Resource):
     def _args(self):
         return [self.url_name]
 
+    def __repr__(self):
+        return f'{self.__class__.__name__}(item_name="{self.item_name}")'
+
 
 @dataclass(init=False, frozen=True)
 class Order(Resource):
@@ -91,6 +94,9 @@ class User(Resource):
     banned: bool
     id: str
     avatar: str
+
+    def _args(self):
+        return [self.ingame_name]
 
 
 @dataclass(init=False, frozen=True)
